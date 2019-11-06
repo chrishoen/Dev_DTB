@@ -57,8 +57,8 @@
 	exclusive-use =
 		"P9.13",		// uart4_txd
 		"P9.11",		// uart4_rxd
-		"P9.14",		// uart4_de/re
-		"gpio1_18",
+		"P9.12",		// uart4_de/re
+		"gpio1_28",
 
 		"uart4";		// hardware ip used
 
@@ -85,7 +85,7 @@
 		__overlay__ {
 			P9_13_pinmux { status = "disabled"; };	/* P9_13: gpmc_wpn.uart4_txd_mux2 */
 			P9_11_pinmux { status = "disabled"; };	/* P9_11: gpmc_wait0.uart4_rxd_mux2 */
-			P9_14_pinmux { status = "disabled"; };	/* P9_14: PIN_OUTPUT_PULLDOWN | MUX_MODE7 (GPIO3_19) */
+			P9_12_pinmux { status = "disabled"; };	/* P9_12: PIN_OUTPUT_PULLDOWN | MUX_MODE7 (GPIO1_28) */
 		};
 	};
 
@@ -96,7 +96,7 @@
 				pinctrl-single,pins = <
 					BONE_P9_13 (PIN_OUTPUT | MUX_MODE6)	/* P9_13: gpmc_wpn.uart4_txd_mux2 */
 					BONE_P9_11 (PIN_INPUT  | MUX_MODE6)	/* P9_11: gpmc_wait0.uart4_rxd_mux2 */
-					BONE_P9_14 0x07				/* P9_14: PIN_OUTPUT_PULLDOWN | MUX_MODE7 (GPIO3_19) */
+					BONE_P9_12 0x07				/* P9_12: PIN_OUTPUT_PULLDOWN | MUX_MODE7 (GPIO1_28) */
 				>;
 			};
 		};
@@ -110,7 +110,7 @@
 			pinctrl-0 = <&bb_uart4_rs485_pins>;
 			rs485-rts-delay = <0 0>;
 
-			rts-gpio = <&gpio1 18 1>; /*  GPIO_ACTIVE_HIGH>; */
+			rts-gpio = <&gpio1 28 1>; /*  GPIO_ACTIVE_HIGH>; */
 			rs485-rts-active-high;
 			linux,rs485-enabled-at-boot-time;
 		};
