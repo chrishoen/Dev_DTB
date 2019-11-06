@@ -1,4 +1,7 @@
 # User-specific files
 *.dtso
+build1.sh
+build2.sh
+
 
 
