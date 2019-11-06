@@ -45,8 +45,8 @@
 
 //#include <dt-bindings/board/am335x-bbw-bbb-base.h>
 //#include <dt-bindings/pinctrl/am33xx.h>
-#include "/home/debian/work/bb.org/overlays/src/arm/dt-bindings/board/am335x-bbw-bbb-base.h"
-#include "/home/debian/work/bb.org/overlays/src/arm/dt-bindings/pinctrl/am33xx.h"
+#include "/home/debian/work/bb.org-overlays/src/arm/dt-bindings/board/am335x-bbw-bbb-base.h"
+#include "/home/debian/work/bb.org-overlays/src/arm/dt-bindings/pinctrl/am33xx.h"
 
 / {
 	compatible = "ti,beaglebone", "ti,beaglebone-black", "ti,beaglebone-green";
