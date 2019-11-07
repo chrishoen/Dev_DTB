@@ -50,7 +50,7 @@
 	compatible = "ti,beaglebone", "ti,beaglebone-black", "ti,beaglebone-green";
 
 	// identification
-	part-number = "BB-UART4-RS485";
+	part-number = "MYUART4";
 	version = "00A0";
 
 	// resources this cape uses
@@ -71,7 +71,7 @@
 
 			chosen {
 				overlays {
-					BB-UART4-RS485-00A0 = __TIMESTAMP__;
+					MYUART4 = __TIMESTAMP__;
 				};
 			};
 		};
