@@ -13,11 +13,16 @@
 
 	// resources this cape uses
 	exclusive-use =
+		"P9.24",		// uart1_txd
+		"P9.26",		// uart1_rxd
+		"P9.25",		// uart1_de/re
+		"gpio3_21",     // uart1_de/re
+		"uart4",		// uart1 hardware ip used
 		"P9.13",		// uart4_txd
 		"P9.11",		// uart4_rxd
 		"P9.14",		// uart4_de/re
-		"gpio1_18",
-		"uart4";		// hardware ip used
+		"gpio1_18",     // uart4_de/re
+		"uart4";		// uart4 hardware ip used
 
 	/*
 	 * Helper to show loaded overlays under: /proc/device-tree/chosen/overlays/
@@ -40,9 +45,12 @@
 	fragment@1 {
 		target = <&ocp>;
 		__overlay__ {
-			P9_13_pinmux { status = "disabled"; };	/* P9_13: gpmc_wpn.uart4_txd_mux2 */
-			P9_11_pinmux { status = "disabled"; };	/* P9_11: gpmc_wait0.uart4_rxd_mux2 */
-			P9_14_pinmux { status = "disabled"; };	/* P9_14: PIN_OUTPUT_PULLDOWN | MUX_MODE7 (GPIO1_18) */
+			P9_24_pinmux { status = "disabled"; };	/* P9_13: UART1_TXD */
+			P9_26_pinmux { status = "disabled"; };	/* P9_11: UART1_RXD */
+			P9_25_pinmux { status = "disabled"; };	/* P9_14: UART1_DIR */
+			P9_13_pinmux { status = "disabled"; };	/* P9_13: UART4_TXD */
+			P9_11_pinmux { status = "disabled"; };	/* P9_11: UART4_RXD */
+			P9_14_pinmux { status = "disabled"; };	/* P9_14: UART4_DIR */
 		};
 	};
 
@@ -51,9 +59,9 @@
 		__overlay__ {
 			bb_uart4_rs485_pins: pinmux_bb_uart4_rs485_pins {
 				pinctrl-single,pins = <
-					BONE_P9_13 (PIN_OUTPUT | MUX_MODE6)	/* P9_13: gpmc_wpn.uart4_txd_mux2 */
-					BONE_P9_11 (PIN_INPUT  | MUX_MODE6)	/* P9_11: gpmc_wait0.uart4_rxd_mux2 */
-					BONE_P9_14 0x07				        /* P9_14: PIN_OUTPUT_PULLDOWN | MUX_MODE7 (GPIO1_18) */
+					BONE_P9_13 (PIN_OUTPUT | MUX_MODE6)	/* P9_13: UART4_TXD */
+					BONE_P9_11 (PIN_INPUT  | MUX_MODE6)	/* P9_11: UART4_RXD */
+					BONE_P9_14 0x07				        /* P9_14: UART4_DIR */
 				>;
 			};
 		};
