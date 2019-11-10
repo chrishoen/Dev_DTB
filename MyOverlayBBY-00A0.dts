@@ -17,7 +17,7 @@
 		"P9.26",		// uart1_rxd
 		"P9.25",		// uart1_de/re
 		"gpio3_21",     // uart1_de/re
-		"uart4",		// uart1 hardware ip used
+		"uart1",		// uart1 hardware ip used
 		"P9.13",		// uart4_txd
 		"P9.11",		// uart4_rxd
 		"P9.14",		// uart4_de/re
@@ -45,29 +45,56 @@
 	fragment@1 {
 		target = <&ocp>;
 		__overlay__ {
-			P9_24_pinmux { status = "disabled"; };	/* P9_13: UART1_TXD */
-			P9_26_pinmux { status = "disabled"; };	/* P9_11: UART1_RXD */
-			P9_25_pinmux { status = "disabled"; };	/* P9_14: UART1_DIR */
+			P9_24_pinmux { status = "disabled"; };	/* P9_24: UART1_TXD */
+			P9_26_pinmux { status = "disabled"; };	/* P9_26: UART1_RXD */
+			P9_25_pinmux { status = "disabled"; };	/* P9_25: UART1_DE  */
 			P9_13_pinmux { status = "disabled"; };	/* P9_13: UART4_TXD */
 			P9_11_pinmux { status = "disabled"; };	/* P9_11: UART4_RXD */
-			P9_14_pinmux { status = "disabled"; };	/* P9_14: UART4_DIR */
+			P9_14_pinmux { status = "disabled"; };	/* P9_14: UART4_DE  */
 		};
 	};
 
 	fragment@2 {
 		target = <&am33xx_pinmux>;
 		__overlay__ {
-			bb_uart4_rs485_pins: pinmux_bb_uart4_rs485_pins {
+			bb_uart1_rs485_pins: pinmux_bb_uart1_rs485_pins {
 				pinctrl-single,pins = <
-					BONE_P9_13 (PIN_OUTPUT | MUX_MODE6)	/* P9_13: UART4_TXD */
-					BONE_P9_11 (PIN_INPUT  | MUX_MODE6)	/* P9_11: UART4_RXD */
-					BONE_P9_14 0x07				        /* P9_14: UART4_DIR */
+					BONE_P9_24 (PIN_OUTPUT | MUX_MODE6)	/* P9_24: UART1_TXD */
+					BONE_P9_26 (PIN_INPUT  | MUX_MODE6)	/* P9_26: UART1_RXD */
+					BONE_P9_25 0x07				        /* P9_25: UART1_DE */
 				>;
 			};
 		};
 	};
 
 	fragment@3 {
+		target = <&am33xx_pinmux>;
+		__overlay__ {
+			bb_uart4_rs485_pins: pinmux_bb_uart4_rs485_pins {
+				pinctrl-single,pins = <
+					BONE_P9_13 (PIN_OUTPUT | MUX_MODE6)	/* P9_13: UART4_TXD */
+					BONE_P9_11 (PIN_INPUT  | MUX_MODE6)	/* P9_11: UART4_RXD */
+					BONE_P9_14 0x07				        /* P9_14: UART4_DE  */
+				>;
+			};
+		};
+	};
+
+	fragment@4 {
+		target = <&uart1>;
+		__overlay__ {
+			status = "okay";
+			pinctrl-names = "default";
+			pinctrl-0 = <&bb_uart1_rs485_pins>;
+			rs485-rts-delay = <0 0>;
+
+			rts-gpio = <&gpio3 21 1>; /*  P9_25: UART1_DE */
+			rs485-rts-active-high;
+			linux,rs485-enabled-at-boot-time;
+		};
+	};
+
+	fragment@5 {
 		target = <&uart4>;
 		__overlay__ {
 			status = "okay";
@@ -75,15 +102,12 @@
 			pinctrl-0 = <&bb_uart4_rs485_pins>;
 			rs485-rts-delay = <0 0>;
 
-			rts-gpio = <&gpio1 18 1>; /*  GPIO_ACTIVE_HIGH>; */
+			rts-gpio = <&gpio1 18 1>; /*  P9_14: UART4_DE */
 			rs485-rts-active-high;
 			linux,rs485-enabled-at-boot-time;
 		};
 	};
 };
-
-
-
 
 /*
  * Copyright 2015 Sebastian Jegerås
