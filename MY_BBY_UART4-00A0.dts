@@ -13,10 +13,10 @@
 
 	// resources this cape uses
 	exclusive-use =
-		"P9.13",		// uart4_txd
-		"P9.11",		// uart4_rxd
-		"P9.14",		// uart4_de/re
-		"gpio1_18",
+		"P9.13",		// UART4 TXD
+		"P9.11",		// UART4 RXD
+		"P9.14",		// UART4 DE
+		"gpio1_18",     // UART4 DE
 		"uart4";		// hardware ip used
 
 	/*
