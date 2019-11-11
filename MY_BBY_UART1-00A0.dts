@@ -51,8 +51,8 @@
 		__overlay__ {
 			bb_uart1_rs485_pins: pinmux_bb_uart1_rs485_pins {
 				pinctrl-single,pins = <
-					BONE_P9_24 (PIN_OUTPUT | MUX_MODE6)	/* P9_24: UART1_TXD */
-					BONE_P9_26 (PIN_INPUT  | MUX_MODE6)	/* P9_26: UART1_RXD */
+					BONE_P9_24 (PIN_OUTPUT | MUX_MODE0)	/* P9_24: UART1_TXD */
+					BONE_P9_26 (PIN_INPUT  | MUX_MODE0)	/* P9_26: UART1_RXD */
 					BONE_P9_25 0x07				        /* P9_25: UART1_DE  */
 				>;
 			};
